@@ -1,0 +1,9 @@
+[Unit]
+Description=Keyboard application to control mouse
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/usr/bin/kb_mouse
