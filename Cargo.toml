@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 rdev = { version = "0.5.3", features = ["unstable_grab"] }
 enigo = "0.1.3"
+exitcode = "1.1.2"
