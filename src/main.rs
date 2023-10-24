@@ -3,11 +3,12 @@ use enigo::*;
 
 static mut SPEED: i32 = 20;
 static mut ACTIVE: bool = false;
-fn main() {
-    if let Err(_) = grab(callback) {
-      //  println!("Error: {:?}", error)
+fn main() -> std::io::Result<()> {
+    if let Err(error) = grab(callback) {
+        println!("Error: {:?}", error);
         std::process::exit(exitcode::SOFTWARE);
     }
+    Ok(())
 }
 
 fn callback(event: Event) -> Option<Event> {
