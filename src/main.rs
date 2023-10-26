@@ -1,13 +1,23 @@
 use rdev::{Event, EventType, grab};
 use enigo::*;
+use fslock::LockFile;  
 
 static mut SPEED: i32 = 20;
 static mut ACTIVE: bool = false;
-fn main() {
-    if let Err(error) = grab(callback) {
-        println!("Error: {:?}", error);
-        std::process::exit(exitcode::SOFTWARE);
+
+fn main() -> Result<(), fslock::Error> {
+    let mut file = LockFile::open("/var/run/kb_mouse.lock")?;
+    if file.try_lock_with_pid()? {
+        if let Err(error) = grab(callback) {
+            println!("Error: {:?}", error);
+            std::process::exit(1);
+        }
     }
+    else {
+        std::process::exit(2);
+    }
+    
+    Ok(())
 }
 
 fn callback(event: Event) -> Option<Event> {
