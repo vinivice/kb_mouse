@@ -2,7 +2,7 @@ use rdev::{Event, EventType, grab};
 use enigo::*;
 use fslock::LockFile;  
 
-static mut SPEED: i32 = 20;
+static mut SPEED: i32 = 15;
 static mut ACTIVE: bool = false;
 
 fn main() -> Result<(), fslock::Error> {
